@@ -57,7 +57,31 @@ open a terminal and type `tsc index.ts`. You should now see the transpiled `inde
 
 ## Folder Structure
 
-comming soon!
+let's add a `src` folder which will contain all of the typescript files and make it as `Root Directory` in `tsconfig.json` file When **TypeScript** compiles files, it keeps the same directory structure in the output directory as exists in the input directory.
+
+For example, let’s say you have some input files:
+
+MyProj
+├── tsconfig.json
+├── src
+│   ├── a.ts
+│   ├── b.ts
+│   ├── sub
+│   │   ├── c.ts
+├── types.d.ts
+
+The inferred value for `rootDir` is the longest common path of all non-declaration input files, which in this case is `src/`.
+
+If your `outDir` was `dist`, TypeScript would write this tree:
+
+MyProj
+├── dist
+│   ├── a.js
+│   ├── b.js
+│   ├── sub
+│   │   ├── c.js
+
+🔗 [Read more from documentation](https://www.typescriptlang.org/tsconfig#rootDir)
 
 ## Basic Types
 

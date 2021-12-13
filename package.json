@@ -6,8 +6,8 @@
   "author": "mohammedelzanaty <mohammedelzanaty129@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "tsc index",
-    "tsc:watch": "tsc --watch index"
+    "build": "tsc",
+    "tsc:watch": "tsc --watch"
   },
   "devDependencies": {
     "typescript": "^4.5.3"

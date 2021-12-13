@@ -12,5 +12,13 @@
       * 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', 'ESNext'
     **/
     "module": "commonjs",
+    /**
+      * Redirect output structure to the directory
+    **/
+    "outDir": "./dist",
+    /**
+      * Specify The root directory of input files. Use to control the output directory structure with --outDir 
+    **/
+    "rootDir": "./src" 
   }
 }
