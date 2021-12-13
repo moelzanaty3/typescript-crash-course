@@ -22,10 +22,38 @@ npm install typescript --save-dev
 yarn add typescript --dev
 ```
 
-## TSC && Config File
+🎭 © [typescriptlang.org](https://www.typescriptlang.org/download)
 
-comming soon!
+## TSC && tsconfig.json
 
+Typically the first step in any new TypeScript project is to add a `tsconfig.json` file. A `tsconfig.json` file defines the TypeScript [project settings](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html), such as the compiler options and the files that should be included. 
+
+To do this, open up the folder where you want to store your source and add a new file named `tsconfig.json`.
+
+A simple `tsconfig.json` looks like this for ES5, [CommonJS](http://www.commonjs.org/specs/modules/1.0) modules and source maps:
+
+```json 
+{
+  "compilerOptions": {
+    "target": "es5", // es6
+    "module": "commonjs"
+  }
+}
+```
+Now when you create a `.ts` file as part of the project we will offer up rich editing experiences and syntax validation.
+
+Let's walk through **transpiling a simple TypeScript Hello World program.**  
+
+1- Create a` index.ts` file, place the following code in that file...
+
+```ts 
+let message: string = 'Hello World';
+console.log(message);
+```
+
+open a terminal and type `tsc index.ts`. You should now see the transpiled `index.js` JavaScript file, which you can run if you have [Node.js](https://nodejs.org/) installed, by typing `node index.js`.
+
+🎭 © [code.visualstudio.com](https://code.visualstudio.com/docs/typescript/typescript-compiling)
 
 ## Folder Structure
 

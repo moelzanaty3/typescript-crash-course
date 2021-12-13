@@ -1,0 +1,15 @@
+{
+  "name": "typescript-crash-course",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/mohammedelzanaty/typescript-crash-course.git",
+  "author": "mohammedelzanaty <mohammedelzanaty129@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc index",
+    "tsc:watch": "tsc --watch index"
+  },
+  "devDependencies": {
+    "typescript": "^4.5.3"
+  }
+}
