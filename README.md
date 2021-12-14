@@ -83,54 +83,146 @@ MyProj
 
 🔗 [Read more from documentation](https://www.typescriptlang.org/tsconfig#rootDir)
 
-## Basic Types
+## Variables and Values
 
-comming soon!
+### Variable Declarations & Inference
 
-## Arrays & Tuples
+In JavaScript we declare variables all the time with `let` and `const` like this:
 
-comming soon!
+```ts 
+let name = 'Younes'
+```
 
-## Unions & Enum
+As we can see, TypeScript is able to [infer](https://www.typescriptlang.org/docs/handbook/type-inference.html) that `name` is a **string**, based on the
+fact that we're initializing it with a value _as we are declaring it_.
 
-comming soon!
+If we try to give `name` a value that is _incompatible_ with `string`, we get an error
 
-## Objects
+```ts 
+let name = 'Younes'
+name = 1
+```
 
-comming soon!
+**In TypeScript, variables are "born" with their types.** Although
+there are ways of making them more specific in certain branches of code,
+there's no (safe) way of changing `name`'s type from `string` to `number`.
 
-## Type Assertion
+Let's try the same thing with `const`:
 
-comming soon!
+```ts 
+const name = 'Younes'
+```
 
-## Functions
+Notice that the type of this variable is not `string`, it's `'Younes'`. **TS is able to make
+a more specific assumption here**, because:
 
-comming soon!
+- `const` variable declarations cannot be reassigned
+- the initial value assigned to `name` is a string, which is an **immutable value type**
 
-## Interfaces
+Therefore, `name` will always be `'Younes'` in this program.
 
-comming soon!
 
-## Function Interface
+### Literal Types
 
-comming soon!
+The type `'Younes'` is called a **literal type**. If our `let` declaration is a variable
+that can hold any `string`, the `const` declaration is one that can hold only `'Younes'` --
+a specific number.
 
-## Classes
+## Implicit `any` and type annotations
 
-comming soon!
+Sometimes, we need to declare a variable before it gets initialized, like `name` below:
 
-## Data Modifiers
+```ts
+let name //=> type of any
+```
 
-comming soon!
+`name` is "born" without a type, so it ends up being an implicit `any`.
 
-## Implement Interface in Class
 
-comming soon!
+TypeScript doesn't have enough information around the declaration site to infer
+what `name` should be, so it gets **the most flexible type: `any`**.
 
-## Extending Classes (Subclasses)
+Think of `any` as "the normal way JS variables work", in that you could assign
+`name` to a `number`, then later a `function`, then a `string`.
 
-comming soon!
+If we wanted more safety here, we could add a **type annotation**:
 
-## Generics
+```ts 
+let name: string
+name = 12
+```
 
-comming soon!
+Now, TypeScript will correctly alert us when we try to flip flop between the number `12` and a `string`.
+
+
+## Function arguments and return values
+
+The syntax we've just seen for variable type annotations can also be used
+to describe function arguments and return values. In this example it's not clear,
+even from the implementation of the function, whether `add` should accept numbers or strings.
+
+```ts 
+// @noImplicitAny: false
+function add(a, b) {
+  return a + b // strings? numbers? a mix?
+}
+```
+
+Here's what your in-editor tooltip would look like if you were using this function:
+
+```ts twoslash
+// @noImplicitAny: false
+function add(a, b) {
+  return a + b
+}
+const result = add(3, "4")
+result
+```
+
+Without type annotations, "anything goes" for the arguments passed into `add`. Why is this a problem?
+
+```ts 
+// @noImplicitAny: false
+function add(a, b) {
+  return a + b
+}
+/// ---cut---
+const result = add(3, "4")
+const p = new Promise(result)
+```
+
+If you've ever created a `Promise` using the promise constructor, you may see
+that we are using a `string` where we _should_ use a two-argument function. This
+is the kind of thing we'd hope that TypeScript could catch for us.
+
+Without type annotations, "anything goes" for the arguments passed into `add`. Why is this a problem?
+
+Let's add some type annotations to our function's arguments:
+
+```ts
+function add(a: number, b: number) {
+  return a + b
+}
+const result = add(3, "4")
+```
+
+Great, now we can enforce that only values of type `number` are passed into the function,
+and TS can now determine the return type automatically:
+
+```ts 
+function add(a: number, b: number) {
+  return a + b
+}
+const result = add(3, 4)
+//              ^?
+```
+
+If we wanted to specifically state a return type, we could do so using the `:foo` syntax in one more place
+
+```ts 
+function add(a: number, b: number): number {}
+```
+
+This is a great way for code authors to state their intentions up-front. TypeScript will make sure
+that we live up to this intention, and errors will be surfaced _at the location of the function declaration_
+instead of _where we use the value returned by the function_.
