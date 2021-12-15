@@ -226,3 +226,5 @@ function add(a: number, b: number): number {}
 This is a great way for code authors to state their intentions up-front. TypeScript will make sure
 that we live up to this intention, and errors will be surfaced _at the location of the function declaration_
 instead of _where we use the value returned by the function_.
+
+🎭 © Mike North [LinkedIn](https://www.linkedin.com/in/northm/) - [Github](https://github.com/mike-north)
